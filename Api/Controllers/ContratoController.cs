@@ -10,7 +10,7 @@ namespace Api.Controllers;
 
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
-[Authorize (Roles= "Administrador")]    
+// [Authorize (Roles= "Administrador")]    
 
 public class ContratoController : BaseApiController
 {
@@ -103,6 +103,15 @@ public class ContratoController : BaseApiController
         unitofwork.Contratos.Remove(contrato);
         await unitofwork.SaveAsync();
         return NoContent();
+    }
+
+    [HttpGet("activos")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<ContratoDto>>> GetContratosActivos()
+    {
+        var activos = await unitofwork.Contratos.activos();
+        return mapper.Map<List<ContratoDto>>(activos);
     }
 
     private ActionResult Notfound()

@@ -34,7 +34,11 @@ public class ContactoPersonaConfiguration : IEntityTypeConfiguration<ContactoPer
 
         builder.HasData(
             new ContactoPersona { Id = 1, Descripcion = "Madre", IdPersonaFk = 1, IdTipoContactoFk = 2},
-            new ContactoPersona { Id = 2, Descripcion = "Abuelo", IdPersonaFk = 2, IdTipoContactoFk = 1}
+            new ContactoPersona { Id = 2, Descripcion = "Abuelo", IdPersonaFk = 2, IdTipoContactoFk = 1},
+            new ContactoPersona { Id = 3, Descripcion = "Abuela", IdPersonaFk = 5, IdTipoContactoFk = 1},
+            new ContactoPersona { Id = 4, Descripcion = "Tia", IdPersonaFk = 4, IdTipoContactoFk = 2},
+            new ContactoPersona { Id = 5, Descripcion = "Esposa", IdPersonaFk = 5, IdTipoContactoFk = 1},
+            new ContactoPersona { Id = 6, Descripcion = "Hermano", IdPersonaFk = 6, IdTipoContactoFk = 2}
         );
     }
 }

@@ -159,15 +159,6 @@ public class PersonaController : BaseApiController
         return mapper.Map<List<PersonaComDto>>(todos);
     }
 
-    [HttpGet("contratosActivos")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<PersonaConActivosDto>>> GetContratosActivos()
-    {
-        var activos = await unitofwork.Personas.empleadosActivos();
-        return mapper.Map<List<PersonaConActivosDto>>(activos);
-    }
-
     private ActionResult Notfound()
     {
         throw new NotImplementedException();

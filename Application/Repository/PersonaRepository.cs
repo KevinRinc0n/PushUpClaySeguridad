@@ -18,6 +18,11 @@ public class PersonaRepository : GenericRepository<Persona>, IPersona
     {
         var todos = await _context.Personas
         .Where(c => c.IdTipoPersonaFk == 1)
+        .Include(c => c.CategoriaPersona)
+        .Include(c => c.TipoPersona)
+        .Include(c => c.Ciudad)
+        .ThenInclude(c => c.Departamento)
+        .ThenInclude(c => c.Pais)
         .ToListAsync();
 
         return todos;
@@ -27,7 +32,8 @@ public class PersonaRepository : GenericRepository<Persona>, IPersona
     {
         var vigilantes = await _context.Personas
         .Where(c => c.IdTipoPersonaFk == 1 && c.IdCategoriaFk == 1)
-        
+        .Include(c => c.CategoriaPersona)
+        .Include(c => c.TipoPersona)
         .ToListAsync();
 
         return vigilantes;
@@ -37,7 +43,10 @@ public class PersonaRepository : GenericRepository<Persona>, IPersona
     {
         var numerosContacto = await _context.Personas
         .Where(c => c.IdTipoPersonaFk == 1 && c.IdCategoriaFk == 1)
+        .Include(c => c.CategoriaPersona)
+        .Include(c => c.TipoPersona)
         .Include(c => c.ContactosPersonas)
+        .ThenInclude(c => c.TipoContacto)
         .ToListAsync();
 
         return numerosContacto;
@@ -46,7 +55,11 @@ public class PersonaRepository : GenericRepository<Persona>, IPersona
     public async Task<IEnumerable<Persona>> clientesBucaramanga()
     {
         var clientesDeBucaramanga = await _context.Personas
-        .Where(c => c.IdPersona == 2 && c.IdCiudadFk == 1)
+        .Where(c => c.IdTipoPersonaFk == 2 && c.IdCiudadFk == 1)
+        .Include(c => c.TipoPersona)
+        .Include(c => c.Ciudad)
+        .ThenInclude(c => c.Departamento)
+        .ThenInclude(c => c.Pais)
         .ToListAsync();
 
         return clientesDeBucaramanga;
@@ -55,28 +68,25 @@ public class PersonaRepository : GenericRepository<Persona>, IPersona
     public async Task<IEnumerable<Persona>> clientesGironYPiedecuesta()
     {
         var clientesDeGironYPiedecuesta = await _context.Personas
-        .Where(c => c.IdPersona == 2 && c.IdCiudadFk == 2 || c.IdCiudadFk == 3)
-        .ToListAsync();
+            .Where(c => (c.IdCiudadFk == 2 || c.IdCiudadFk == 3) && c.IdTipoPersonaFk == 1) 
+            .Include(c => c.TipoPersona)
+            .Include(c => c.Ciudad)
+            .ThenInclude(c => c.Departamento)
+            .ThenInclude(c => c.Pais)
+            .ToListAsync();
 
         return clientesDeGironYPiedecuesta;
     }
 
     public async Task<IEnumerable<Persona>> clientesAntiguos()
     {
+        var fechaLimite = new DateOnly(2017, 12, 31);
+        
         var antiguos = await _context.Personas
-        .Where(c => c.IdPersona == 2 && c.FechaReg <= new DateOnly (2017, 12, 31))
-        .ToListAsync();
+            .Where(c => c.IdTipoPersonaFk == 2 && c.FechaReg <= fechaLimite) 
+            .Include(c => c.TipoPersona)
+            .ToListAsync();
 
         return antiguos;
-    }
-
-    public async Task<IEnumerable<Persona>> empleadosActivos()
-    {
-        var activos = await _context.Personas
-        .Where(c => c.Contratos.Any(co => co.IdEstadoFk == 1))
-        .Include(c => c.Contratos)
-        .ToListAsync();
-
-        return activos;
     }
 }

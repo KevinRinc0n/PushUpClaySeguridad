@@ -54,7 +54,14 @@ public class PersonaConfiguration : IEntityTypeConfiguration<Persona>
             new Persona { Id = 4, Nombre = "Luis Villa" , IdPersona = 1274, FechaReg = new DateOnly (2003, 7, 3), IdTipoPersonaFk = 2, IdCategoriaFk = 2, IdCiudadFk = 1},
             new Persona { Id = 5, Nombre = "Jose Manrrique" , IdPersona = 89, FechaReg = new DateOnly (2015, 4, 1), IdTipoPersonaFk = 1, IdCategoriaFk = 1, IdCiudadFk = 1},
             new Persona { Id = 6, Nombre = "Emanuel Torres" , IdPersona = 664, FechaReg = new DateOnly (2019, 11, 21), IdTipoPersonaFk = 1, IdCategoriaFk = 1, IdCiudadFk = 2},
-            new Persona { Id = 7, Nombre = "Luna Cardenas" , IdPersona = 43244, FechaReg = new DateOnly (2023, 6, 12), IdTipoPersonaFk = 1, IdCategoriaFk = 1, IdCiudadFk = 2}
+            new Persona { Id = 7, Nombre = "Luna Cardenas" , IdPersona = 43244, FechaReg = new DateOnly (2023, 6, 12), IdTipoPersonaFk = 1, IdCategoriaFk = 1, IdCiudadFk = 2},
+            new Persona { Id = 8, Nombre = "Paco Diaz" , IdPersona = 343, FechaReg = new DateOnly (2019, 11, 21), IdTipoPersonaFk = 2, IdCategoriaFk = 1, IdCiudadFk = 1},
+            new Persona { Id = 9, Nombre = "Jaime Caseres" , IdPersona = 1634, FechaReg = new DateOnly (2012, 1, 21), IdTipoPersonaFk = 2, IdCategoriaFk = 1, IdCiudadFk = 1},
+            new Persona { Id = 10, Nombre = "Luisa Hernandez" , IdPersona = 9675, FechaReg = new DateOnly (1999, 2, 21), IdTipoPersonaFk = 1, IdCategoriaFk = 1, IdCiudadFk = 2},
+            new Persona { Id = 11, Nombre = "Nicole Orduz" , IdPersona = 86756, FechaReg = new DateOnly (2012, 6, 18), IdTipoPersonaFk = 1, IdCategoriaFk = 1, IdCiudadFk = 2},
+            new Persona { Id = 12, Nombre = "Mauricio Jaimes" , IdPersona = 6565, FechaReg = new DateOnly (2017, 1, 21), IdTipoPersonaFk = 1, IdCategoriaFk = 2, IdCiudadFk = 3},
+            new Persona { Id = 13, Nombre = "Fernando Cardenas" , IdPersona = 24324, FechaReg = new DateOnly (2018, 9, 27), IdTipoPersonaFk = 1, IdCategoriaFk = 2, IdCiudadFk = 2},
+            new Persona { Id = 14, Nombre = "Javier Jaimes" , IdPersona = 86876, FechaReg = new DateOnly (2013, 2, 21), IdTipoPersonaFk = 1, IdCategoriaFk = 2, IdCiudadFk = 2}
         );
     }
 }

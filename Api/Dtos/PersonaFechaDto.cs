@@ -6,6 +6,5 @@ public class PersonaFechaDto
     public string Nombre { get; set; }
     public DateOnly FechaReg { get; set; }
     public int IdPersona { get; set; }
-    public int IdTipoPersonaFk { get; set; } 
     public TipoPersonaDto TipoPersona { get; set; }
 }

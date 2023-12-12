@@ -9,5 +9,4 @@ public interface IPersona : IGenericRepository<Persona>
     Task<IEnumerable<Persona>> clientesGironYPiedecuesta();
     Task<IEnumerable<Persona>> clientesAntiguos();
     Task<IEnumerable<Persona>> todosEmpleados();
-    Task<IEnumerable<Persona>> empleadosActivos();
 }
