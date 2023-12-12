@@ -28,7 +28,8 @@ public class CiudadConfiguration : IEntityTypeConfiguration<Ciudad>
 
         builder.HasData(
             new Ciudad { Id = 1, NombreCiudad = "Bucaramanga", IdDepartamentoFk = 1},
-            new Ciudad { Id = 2, NombreCiudad = "Piedecuesta", IdDepartamentoFk = 1}
+            new Ciudad { Id = 2, NombreCiudad = "Piedecuesta", IdDepartamentoFk = 1},
+            new Ciudad { Id = 3, NombreCiudad = "Giron", IdDepartamentoFk = 1}
         );
     }
 }

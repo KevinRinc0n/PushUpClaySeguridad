@@ -28,10 +28,10 @@ public class TipoContactoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<IEnumerable<TipoContacto>>> Get()
+    public async Task<ActionResult<IEnumerable<TipoContactoDto>>> Get()
     {
         var tipoContacto = await unitofwork.TiposContactos.GetAllAsync();
-        return mapper.Map<List<TipoContacto>>(tipoContacto);
+        return mapper.Map<List<TipoContactoDto>>(tipoContacto);
     }
 
     [HttpGet]
@@ -39,27 +39,27 @@ public class TipoContactoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<Pager<TipoContacto>>> Get([FromQuery]Params TipoContactoParams)
+    public async Task<ActionResult<Pager<TipoContactoDto>>> Get([FromQuery]Params TipoContactoParams)
     {
         var tipoContacto = await unitofwork.TiposContactos.GetAllAsync(TipoContactoParams.PageIndex,TipoContactoParams.PageSize, TipoContactoParams.Search);
-        var listaTipoContacto = mapper.Map<List<TipoContacto>>(tipoContacto.registros);
-        return new Pager<TipoContacto>(listaTipoContacto, tipoContacto.totalRegistros,TipoContactoParams.PageIndex,TipoContactoParams.PageSize,TipoContactoParams.Search);
+        var listaTipoContacto = mapper.Map<List<TipoContactoDto>>(tipoContacto.registros);
+        return new Pager<TipoContactoDto>(listaTipoContacto, tipoContacto.totalRegistros,TipoContactoParams.PageIndex,TipoContactoParams.PageSize,TipoContactoParams.Search);
     }
 
     [HttpGet("{id}")]    
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<TipoContacto>> Get(int id)
+    public async Task<ActionResult<TipoContactoDto>> Get(int id)
     {
         var tipoContacto = await unitofwork.TiposContactos.GetByIdAsync(id);
-        return mapper.Map<TipoContacto>(tipoContacto);
+        return mapper.Map<TipoContactoDto>(tipoContacto);
     }
 
     [HttpPost]    
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<TipoContacto>> Post(TipoContacto TipoContactoDto)
+    public async Task<ActionResult<TipoContactoDto>> Post(TipoContactoDto TipoContactoDto)
     {
         var tipoContacto = this.mapper.Map<TipoContacto>(TipoContactoDto);
         this.unitofwork.TiposContactos.Add(tipoContacto);
@@ -76,7 +76,7 @@ public class TipoContactoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<TipoContacto>> Put (int id, [FromBody]TipoContacto TipoContactoDto)
+    public async Task<ActionResult<TipoContactoDto>> Put (int id, [FromBody]TipoContactoDto TipoContactoDto)
     {
         if(TipoContactoDto == null)
             return NotFound();

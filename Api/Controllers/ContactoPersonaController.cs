@@ -28,10 +28,10 @@ public class ContactoPersonaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<IEnumerable<ContactoPersona>>> Get()
+    public async Task<ActionResult<IEnumerable<ContactosPersonasDto>>> Get()
     {
         var contactoPersona = await unitofwork.ContactosPersonas.GetAllAsync();
-        return mapper.Map<List<ContactoPersona>>(contactoPersona);
+        return mapper.Map<List<ContactosPersonasDto>>(contactoPersona);
     }
 
     [HttpGet]
@@ -39,21 +39,21 @@ public class ContactoPersonaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<Pager<ContactoPersona>>> Get([FromQuery]Params contactoPersonaParams)
+    public async Task<ActionResult<Pager<ContactosPersonasDto>>> Get([FromQuery]Params contactoPersonaParams)
     {
         var contactoPersona = await unitofwork.ContactosPersonas.GetAllAsync(contactoPersonaParams.PageIndex,contactoPersonaParams.PageSize, contactoPersonaParams.Search);
-        var listaContactoPersona = mapper.Map<List<ContactoPersona>>(contactoPersona.registros);
-        return new Pager<ContactoPersona>(listaContactoPersona, contactoPersona.totalRegistros,contactoPersonaParams.PageIndex,contactoPersonaParams.PageSize,contactoPersonaParams.Search);
+        var listaContactoPersona = mapper.Map<List<ContactosPersonasDto>>(contactoPersona.registros);
+        return new Pager<ContactosPersonasDto>(listaContactoPersona, contactoPersona.totalRegistros,contactoPersonaParams.PageIndex,contactoPersonaParams.PageSize,contactoPersonaParams.Search);
     }
 
     [HttpGet("{id}")]    
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<ContactoPersona>> Get(int id)
+    public async Task<ActionResult<ContactosPersonasDto>> Get(int id)
     {
         var contactoPersona = await unitofwork.ContactosPersonas.GetByIdAsync(id);
-        return mapper.Map<ContactoPersona>(contactoPersona);
+        return mapper.Map<ContactosPersonasDto>(contactoPersona);
     }
 
     [HttpPost]    

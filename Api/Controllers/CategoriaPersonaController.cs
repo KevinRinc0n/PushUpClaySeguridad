@@ -28,10 +28,10 @@ public class CategoriaPersonaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<IEnumerable<CategoriaPersona>>> Get()
+    public async Task<ActionResult<IEnumerable<CategoriaDto>>> Get()
     {
         var categoriaPersona = await unitofwork.CategoriasPersonas.GetAllAsync();
-        return mapper.Map<List<CategoriaPersona>>(categoriaPersona);
+        return mapper.Map<List<CategoriaDto>>(categoriaPersona);
     }
 
     [HttpGet]
@@ -39,27 +39,27 @@ public class CategoriaPersonaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<Pager<CategoriaPersona>>> Get([FromQuery]Params categoriasPersonasParams)
+    public async Task<ActionResult<Pager<CategoriaDto>>> Get([FromQuery]Params categoriasPersonasParams)
     {
         var categoriaPersona = await unitofwork.CategoriasPersonas.GetAllAsync(categoriasPersonasParams.PageIndex,categoriasPersonasParams.PageSize, categoriasPersonasParams.Search);
-        var listaCategoriasPersonas = mapper.Map<List<CategoriaPersona>>(categoriaPersona.registros);
-        return new Pager<CategoriaPersona>(listaCategoriasPersonas, categoriaPersona.totalRegistros,categoriasPersonasParams.PageIndex,categoriasPersonasParams.PageSize,categoriasPersonasParams.Search);
+        var listaCategoriasPersonas = mapper.Map<List<CategoriaDto>>(categoriaPersona.registros);
+        return new Pager<CategoriaDto>(listaCategoriasPersonas, categoriaPersona.totalRegistros,categoriasPersonasParams.PageIndex,categoriasPersonasParams.PageSize,categoriasPersonasParams.Search);
     }
 
     [HttpGet("{id}")]    
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<CategoriaPersona>> Get(int id)
+    public async Task<ActionResult<CategoriaDto>> Get(int id)
     {
         var categoriaPersonas = await unitofwork.CategoriasPersonas.GetByIdAsync(id);
-        return mapper.Map<CategoriaPersona>(categoriaPersonas);
+        return mapper.Map<CategoriaDto>(categoriaPersonas);
     }
 
     [HttpPost]    
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<CategoriaPersona>> Post(CategoriaPersona categoriaPersonaDto)
+    public async Task<ActionResult<CategoriaDto>> Post(CategoriaDto categoriaPersonaDto)
     {
         var categoriaPersona = this.mapper.Map<CategoriaPersona>(categoriaPersonaDto);
         this.unitofwork.CategoriasPersonas.Add(categoriaPersona);
@@ -76,7 +76,7 @@ public class CategoriaPersonaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<CategoriaPersona>> Put (int id, [FromBody]CategoriaPersona categoriaPersonaDto)
+    public async Task<ActionResult<CategoriaDto>> Put (int id, [FromBody]CategoriaDto categoriaPersonaDto)
     {
         if(categoriaPersonaDto == null)
             return NotFound();
@@ -104,15 +104,6 @@ public class CategoriaPersonaController : BaseApiController
         await unitofwork.SaveAsync();
         return NoContent();
     }
-
-    // [HttpGet("goldenRetriever")]
-    // [ProducesResponseType(StatusCodes.Status200OK)]
-    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    // public async Task<ActionResult<IEnumerable<MascotaPropietarioDto>>> GetRetriever()
-    // {
-    //     var mascotaVeterinario = await unitofwork.Mascotas.mascotaGolden();
-    //     return mapper.Map<List<MascotaPropietarioDto>>(mascotaVeterinario);
-    // }
 
     private ActionResult Notfound()
     {

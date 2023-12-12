@@ -21,8 +21,8 @@ public class TurnoConfiguration : IEntityTypeConfiguration<Turno>
         .IsRequired();
 
         builder.HasData(
-            new Turno { Id = 1, NombreTurno =  "", HoraInicioTurno = TimeSpan.FromHours(5).Add(TimeSpan.FromMinutes(30)) , HoraFinTurno = TimeSpan.FromHours(6).Add(TimeSpan.FromMinutes(2))},
-            new Turno { Id = 2, NombreTurno =  "", HoraInicioTurno = TimeSpan.FromHours(3).Add(TimeSpan.FromMinutes(33)), HoraFinTurno = TimeSpan.FromHours(7).Add(TimeSpan.FromMinutes(58))}
+            new Turno { Id = 1, NombreTurno =  "Diurno", HoraInicioTurno = TimeSpan.FromHours(5).Add(TimeSpan.FromMinutes(30)) , HoraFinTurno = TimeSpan.FromHours(6).Add(TimeSpan.FromMinutes(2))},
+            new Turno { Id = 2, NombreTurno =  "Nocturno", HoraInicioTurno = TimeSpan.FromHours(3).Add(TimeSpan.FromMinutes(33)), HoraFinTurno = TimeSpan.FromHours(7).Add(TimeSpan.FromMinutes(58))}
         );
     }
 }

@@ -15,7 +15,8 @@ public class CategoriaPersonaConfiguration : IEntityTypeConfiguration<CategoriaP
         .HasMaxLength(50);
 
         builder.HasData(
-            new CategoriaPersona { Id = 1, NombreCategoria = "Vigilantes" }        
+            new CategoriaPersona { Id = 1, NombreCategoria = "Vigilantes" },
+            new CategoriaPersona { Id = 2, NombreCategoria = "Aseo" }
             );
     }
 }

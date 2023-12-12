@@ -28,10 +28,10 @@ public class TipoPersonaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<IEnumerable<TipoPersona>>> Get()
+    public async Task<ActionResult<IEnumerable<TipoPersonaDto>>> Get()
     {
         var tipoPersona = await unitofwork.TiposPersonas.GetAllAsync();
-        return mapper.Map<List<TipoPersona>>(tipoPersona);
+        return mapper.Map<List<TipoPersonaDto>>(tipoPersona);
     }
 
     [HttpGet]
@@ -39,27 +39,27 @@ public class TipoPersonaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<Pager<TipoPersona>>> Get([FromQuery]Params TipoPersonaParams)
+    public async Task<ActionResult<Pager<TipoPersonaDto>>> Get([FromQuery]Params TipoPersonaParams)
     {
         var tipoPersona = await unitofwork.TiposPersonas.GetAllAsync(TipoPersonaParams.PageIndex,TipoPersonaParams.PageSize, TipoPersonaParams.Search);
-        var listaTipoPersona = mapper.Map<List<TipoPersona>>(tipoPersona.registros);
-        return new Pager<TipoPersona>(listaTipoPersona, tipoPersona.totalRegistros,TipoPersonaParams.PageIndex,TipoPersonaParams.PageSize,TipoPersonaParams.Search);
+        var listaTipoPersona = mapper.Map<List<TipoPersonaDto>>(tipoPersona.registros);
+        return new Pager<TipoPersonaDto>(listaTipoPersona, tipoPersona.totalRegistros,TipoPersonaParams.PageIndex,TipoPersonaParams.PageSize,TipoPersonaParams.Search);
     }
 
     [HttpGet("{id}")]    
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<TipoPersona>> Get(int id)
+    public async Task<ActionResult<TipoPersonaDto>> Get(int id)
     {
         var tipoPersona = await unitofwork.TiposPersonas.GetByIdAsync(id);
-        return mapper.Map<TipoPersona>(tipoPersona);
+        return mapper.Map<TipoPersonaDto>(tipoPersona);
     }
 
     [HttpPost]    
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<TipoPersona>> Post(TipoPersona TipoPersonaDto)
+    public async Task<ActionResult<TipoPersonaDto>> Post(TipoPersonaDto TipoPersonaDto)
     {
         var TipoPersona = this.mapper.Map<TipoPersona>(TipoPersonaDto);
         this.unitofwork.TiposPersonas.Add(TipoPersona);
@@ -76,7 +76,7 @@ public class TipoPersonaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<TipoPersona>> Put (int id, [FromBody]TipoPersona TipoPersonaDto)
+    public async Task<ActionResult<TipoPersonaDto>> Put (int id, [FromBody]TipoPersonaDto TipoPersonaDto)
     {
         if(TipoPersonaDto == null)
             return NotFound();

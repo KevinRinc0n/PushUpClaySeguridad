@@ -15,9 +15,8 @@ public class EstadoConfiguration : IEntityTypeConfiguration<Estado>
         .HasMaxLength(50);
 
         builder.HasData(
-            new Estado { Id = 1, Descripcion = "Aprobado" },
-            new Estado { Id = 2, Descripcion = "En proceso" },
-            new Estado { Id = 3, Descripcion = "rechazado" }
+            new Estado { Id = 1, Descripcion = "Activo" },
+            new Estado { Id = 2, Descripcion = "Inactivo" }
         );
     }
 }

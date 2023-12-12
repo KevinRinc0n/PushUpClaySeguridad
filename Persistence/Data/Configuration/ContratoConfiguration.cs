@@ -32,6 +32,8 @@ public class ContratoConfiguration : IEntityTypeConfiguration<Contrato>
         .WithMany(p => p.Contratos)
         .HasForeignKey(p => p.IdClienteFk);
 
+        builder.Ignore(p => p.Persona);
+
         builder.HasOne(p => p.Personaa)
         .WithMany(p => p.Contratos)
         .HasForeignKey(p => p.IdEmpleadoFk);

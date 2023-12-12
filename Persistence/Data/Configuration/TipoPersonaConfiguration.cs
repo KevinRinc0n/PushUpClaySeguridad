@@ -16,7 +16,7 @@ public class TipoPersonaConfiguration : IEntityTypeConfiguration<TipoPersona>
 
         builder.HasData(
             new TipoPersona { Id = 1, Descripcion =  "Empleado"},
-            new TipoPersona { Id = 2, Descripcion =  "Usuario"}
+            new TipoPersona { Id = 2, Descripcion =  "Cliente"}
         );
     }
 }
